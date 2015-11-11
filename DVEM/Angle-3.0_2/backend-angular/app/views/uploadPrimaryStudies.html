@@ -1,0 +1,60 @@
+    <h3>Primary Studies
+       <small>Upload Primary Studies</small>
+    </h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Upload Primary Studies
+        </div>
+        <div class="panel-body">
+            <div ng-controller="DataTableController as table3">
+                <table datatable="ng" class="row-border hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>RefType</th>
+                        <th>Record Date</th>
+                        <th>Primary Authors</th>
+                        <th>Primary Title</th>
+                        <th>Full Periodical</th>
+                        <th>Periodical Abbrev</th>
+                        <th>Pub Year</th>
+                        <th>Pub Date</th>
+                        <th>Volume</th>
+                        <th>Issue</th>
+                        <th>Start Page</th>
+                        <th>Other Page</th>
+                        <th>Keywords</th>
+                        <th>Abstract</th>
+                        <th>Notes</th>
+                        <th>Personal Notes</th>
+                        <th>Secondary Authors</th>
+                        <th>Secondary Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in table3.persons">
+                        <td>{{ person.ID }}</td>
+                        <td>{{ person.RefType }}</td>
+                        <td>{{ person.recordDate }}</td>
+                        <td>{{ person.PrimaryAuthors }}</td>
+                        <td>{{ person.PrimaryTitle }}</td>
+                        <td>{{ person.FullPeriodical }}</td>
+                        <td>{{ person.PeriodicalAbbrev }}</td>
+                        <td>{{ person.PubYear }}</td>
+                        <td>{{ person.PubDate }}</td>
+                        <td>{{ person.Volume }}</td>
+                        <td>{{ person.Issue }}</td>
+                        <td>{{ person.StartPage }}</td>
+                        <td>{{ person.OtherPage }}</td>
+                        <td>{{ person.Keywords }}</td>
+                        <td>{{ person.Abstract }}</td>
+                        <td>{{ person.Notes }}</td>
+                        <td>{{ person.PersonalNotes }}</td>
+                        <td>{{ person.SecondaryAuthors }}</td>
+                        <td>{{ person.SecondaryTitle }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

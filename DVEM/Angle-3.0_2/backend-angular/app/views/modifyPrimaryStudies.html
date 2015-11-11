@@ -1,0 +1,176 @@
+    <h3>Primary Studies
+       <small>Modify Primary Studies</small>
+    </h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Modify Primary Studies
+        </div>
+        <div class="panel-body">
+            <div ng-controller="DataTableController as table1">
+                    <table datatable="ng" class="row-border hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>RefType</th>
+                        <th>Record Date</th>
+                        <th>Primary Authors</th>
+                        <th>Primary Title</th>
+                        <th>Full Periodical</th>
+                        <th>Periodical Abbrev</th>
+                        <th>Pub Year</th>
+                        <th>Pub Date</th>
+                        <th>Volume</th>
+                        <th>Issue</th>
+                        <th>Start Page</th>
+                        <th>Other Page</th>
+                        <th>Keywords</th>
+                        <th style="width: 200%">Abstract</th>
+                        <th>Notes</th>
+                        <th>person1al Notes</th>
+                        <th>Secondary Authors</th>
+                        <th>Secondary Title</th>
+                        <th>Edition</th>
+                        <th>Publisher</th>
+                        <th>PlacePub</th>
+                        <th>Tertiary Authors</th>
+                        <th>Quaternary Authors</th>
+                        <th>Quinary Authors</th>
+                        <th>Tertiary Title</th>
+                        <th>ISSN</th>
+                        <th>Availability</th>
+                        <th>Address</th>
+                        <th>Account Number</th>
+                        <th>Language</th>
+                        <th>Classification</th>
+                        <th>SubFile</th>
+                        <th>Org Foriegn Title</th>
+                        <th>url</th>
+                        <th>DOI</th>
+                        <th>CallNumber</th>
+                        <th>Database</th>
+                        <th>DataSource</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person1 in table1.persons">
+                        <td>{{ person1.ID }}</td>
+                        <td>{{ person1.RefType }}</td>
+                        <td>{{ person1.recordDate }}</td>
+                        <td>{{ person1.PrimaryAuthors }}</td>
+                        <td>{{ person1.PrimaryTitle }}</td>
+                        <td>{{ person1.FullPeriodical }}</td>
+                        <td>{{ person1.PeriodicalAbbrev }}</td>
+                        <td>{{ person1.PubYear }}</td>
+                        <td>{{ person1.PubDate }}</td>
+                        <td>{{ person1.Volume }}</td>
+                        <td>{{ person1.Issue }}</td>
+                        <td>{{ person1.StartPage }}</td>
+                        <td>{{ person1.OtherPage }}</td>
+                        <td>{{ person1.Keywords }}</td>
+                        <td style="width: 200%">{{ person1.Abstract }}</td>
+                        <td>{{ person1.Notes }}</td>
+                        <td>{{ person1.person1alNotes }}</td>
+                        <td>{{ person1.SecondaryAuthors }}</td>
+                        <td>{{ person1.SecondaryTitle }}</td>
+                        <td>{{ person1.Edition }}</td>
+                        <td>{{ person1.Publisher }}</td>
+                        <td>{{ person1.PlacePub }}</td>
+                        <td>{{ person1.TertiaryAuthors }}</td>
+                        <td>{{ person1.QuaternaryAuthors }}</td>
+                        <td>{{ person1.QuinaryAuthors }}</td>
+                        <td>{{ person1.TertiaryTitle }}</td>
+                        <td>{{ person1.ISSN }}</td>
+                        <td>{{ person1.Availability }}</td>
+                        <td>{{ person1.Address }}</td>
+                        <td>{{ person1.AccNumber }}</td>
+                        <td>{{ person1.Language }}</td>
+                        <td>{{ person1.Classification }}</td>
+                        <td>{{ person1.SubFile }}</td>
+                        <td>{{ person1.OrgForiegnTitle }}</td>
+                        <td>{{ person1.url }}</td>
+                        <td>{{ person1.DOI }}</td>
+                        <td>{{ person1.CallNumber }}</td>
+                        <td>{{ person1.Database }}</td>
+                        <td>{{ person1.DataSource }}</td>
+                        <td>
+                            <button type="button" ng-click="table1.modifyperson($index)" class="btn btn-sm btn-warning">
+                                <em class="fa fa-edit"></em>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                </div>
+            </div>
+    </div>
+<!--
+   <div class="panel panel-default">
+      <div class="panel-heading">Datatables |
+         <small>Chaning data</small>
+      </div>
+      <div class="panel-body">
+         <div ng-controller="DataTableController as table2">
+            <form ng-submit="table2.addperson1()" class="form-inline">
+               <table datatable="ng" dt-options="table2.dtOptions" dt-column-defs="table2.dtColumnDefs" class="row-border hover">
+                  <thead>
+                     <tr>
+                        <th>
+                           <div class="form-group">
+                              <label>
+                                 <input type="number" name="id" ng-model="table2.person12Add.id" value="" class="form-control" />
+                              </label>
+                           </div>
+                        </th>
+                        <th>
+                           <div class="form-group">
+                              <label>
+                                 <input type="text" name="firstName" ng-model="table2.person12Add.firstName" value="" class="form-control" />
+                              </label>
+                           </div>
+                        </th>
+                        <th>
+                           <div class="form-group">
+                              <label>
+                                 <input type="text" name="lastName" ng-model="table2.person12Add.lastName" value="" class="form-control" />
+                              </label>
+                           </div>
+                        </th>
+                        <th>
+                           <div class="form-group">
+                              <button type="submit" class="btn btn-labeled btn-success">
+                                 <span class="btn-label">
+                                    <em class="fa fa-plus"></em>
+                                 </span>Add</button>
+                           </div>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>Hero ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr ng-repeat="hero in table2.heroes">
+                        <td>{{ hero.id }}</td>
+                        <td>{{ hero.firstName }}</td>
+                        <td>{{ hero.lastName }}</td>
+                        <td>
+                           <button type="button" ng-click="table2.modifyperson1($index)" class="btn btn-sm btn-warning">
+                              <em class="fa fa-edit"></em>
+                           </button>
+                           <button type="button" ng-click="table2.removeperson1($index)" class="btn btn-sm btn-danger">
+                              <em class="fa fa-trash-o"></em>
+                           </button>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </form>
+         </div>
+      </div>
+   </div>
+-->

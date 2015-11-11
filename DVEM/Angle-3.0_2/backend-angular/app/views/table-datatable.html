@@ -1,0 +1,168 @@
+    <h3>Primary Studies
+       <small>View Primary Studies</small>
+    </h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">View Primary Studies
+        </div>
+        <div class="panel-body">
+            <!--<div dropdown="dropdown" class="btn-group mb-sm">
+                <button type="button" ng-disabled="disabled" dropdown-toggle="" class="btn dropdown-toggle btn-primary">Hide Columns
+                    <span class="caret"></span>
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a class="toggle-vis" data-column="0">ID</a></li>
+                    <li><a class="toggle-vis" data-column="1">RefType</a></li>
+                    <li><a class="toggle-vis" data-column="2">Record Date</a></li>
+                    <li><a class="toggle-vis" data-column="3">Primary Authors</a></li>
+                    <li><a class="toggle-vis" data-column="4">Primary Title</a></li>
+                    <li><a class="toggle-vis" data-column="5">Full Periodical</a></li>
+                    <li><a class="toggle-vis" data-column="6">Periodical Abbrev</a></li>
+                    <li><a class="toggle-vis" data-column="7">Pub Year</a></li>
+                    <li><a class="toggle-vis" data-column="8">Pub Date</a></li>
+                    <li><a class="toggle-vis" data-column="9">Volume</a></li>
+                    <li><a class="toggle-vis" data-column="10">Issue</a></li>
+                    <li><a class="toggle-vis" data-column="11">Start Page</a></li>
+                    <li><a class="toggle-vis" data-column="12">Other Page</a></li>
+                    <li><a class="toggle-vis" data-column="13">Keywords</a></li>
+                    <li><a class="toggle-vis" data-column="14">Abstract</a></li>
+                    <li><a class="toggle-vis" data-column="15">Notes</a></li>
+                    <li><a class="toggle-vis" data-column="16">person1al Notes</a></li>
+                    <li><a class="toggle-vis" data-column="17">Secondary Authors</a></li>
+                    <li><a class="toggle-vis" data-column="18">Secondary Title</a></li>
+                    <li><a class="toggle-vis" data-column="19">Edition</a></li>
+                    <li><a class="toggle-vis" data-column="20">Publisher</a></li>
+                    <li><a class="toggle-vis" data-column="21">PlacePub</a></li>
+                    <li><a class="toggle-vis" data-column="22">Tertiary Authors</a></li>
+                    <li><a class="toggle-vis" data-column="23">Quaternary Authors</a></li>
+                    <li><a class="toggle-vis" data-column="24">Quinary Authors</a></li>
+                    <li><a class="toggle-vis" data-column="25">Tertiary Title</a></li>
+                    <li><a class="toggle-vis" data-column="26">ISSN</a></li>
+                    <li><a class="toggle-vis" data-column="27">Availability</a></li>
+                    <li><a class="toggle-vis" data-column="28">Address</a></li>
+                    <li><a class="toggle-vis" data-column="29">Account Number</a></li>
+                    <li><a class="toggle-vis" data-column="30">Language</a></li>
+                    <li><a class="toggle-vis" data-column="31">Classification</a></li>
+                    <li><a class="toggle-vis" data-column="32">SubFile</a></li>
+                    <li><a class="toggle-vis" data-column="33">Org Foriegn Title</a></li>
+                    <li><a class="toggle-vis" data-column="34">url</a></li>
+                    <li><a class="toggle-vis" data-column="35">DOI</a></li>
+                    <li><a class="toggle-vis" data-column="36">CallNumber</a></li>
+                    <li><a class="toggle-vis" data-column="37">Database</a></li>
+                    <li><a class="toggle-vis" data-column="38">DataSource</a></li>
+                </ul>
+            </div>-->
+            <div>
+                Toggle column: <a class="toggle-vis" data-column="0">ID</a> - <a class="toggle-vis" data-column="1">RefType</a>
+            </div>
+            <div ng-controller="DataTableController as table2">
+                <table id="table12" class="row-border hover">
+                    <thead>
+                    <tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>RefType</th>
+                        <th>Record Date</th>
+                        <th>Primary Authors</th>
+                        <th>Primary Title</th>
+                        <th>Full Periodical</th>
+                        <th>Periodical Abbrev</th>
+                        <th>Pub Year</th>
+                        <th>Pub Date</th>
+                        <th>Volume</th>
+                        <th>Issue</th>
+                        <th>Start Page</th>
+                        <th>Other Page</th>
+                        <th>Keywords</th>
+                        <th style="width: 200%">Abstract</th>
+                        <th>Notes</th>
+                        <th>person1al Notes</th>
+                        <th>Secondary Authors</th>
+                        <th>Secondary Title</th>
+                        <th>Edition</th>
+                        <th>Publisher</th>
+                        <th>PlacePub</th>
+                        <th>Tertiary Authors</th>
+                        <th>Quaternary Authors</th>
+                        <th>Quinary Authors</th>
+                        <th>Tertiary Title</th>
+                        <th>ISSN</th>
+                        <th>Availability</th>
+                        <th>Address</th>
+                        <th>Account Number</th>
+                        <th>Language</th>
+                        <th>Classification</th>
+                        <th>SubFile</th>
+                        <th>Org Foriegn Title</th>
+                        <th>url</th>
+                        <th>DOI</th>
+                        <th>CallNumber</th>
+                        <th>Database</th>
+                        <th>DataSource</th>
+                    </tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in table2.persons">
+                        <td class="toggle-vis" data-cell="0">{{ person.ID }}</td>
+                        <td>{{ person.RefType }}</td>
+                        <td>{{ person.recordDate }}</td>
+                        <td>{{ person.PrimaryAuthors }}</td>
+                        <td style="width: 400%">{{ person.PrimaryTitle }}</td>
+                        <td>{{ person.FullPeriodical }}</td>
+                        <td>{{ person.PeriodicalAbbrev }}</td>
+                        <td>{{ person.PubYear }}</td>
+                        <td>{{ person.PubDate }}</td>
+                        <td>{{ person.Volume }}</td>
+                        <td>{{ person.Issue }}</td>
+                        <td>{{ person.StartPage }}</td>
+                        <td>{{ person.OtherPage }}</td>
+                        <td>{{ person.Keywords }}</td>
+                        <td style="width: 200%">{{ person.Abstract }}</td>
+                        <td>{{ person.Notes }}</td>
+                        <td>{{ person.person1alNotes }}</td>
+                        <td>{{ person.SecondaryAuthors }}</td>
+                        <td>{{ person.SecondaryTitle }}</td>
+                        <td>{{ person.Edition }}</td>
+                        <td>{{ person.Publisher }}</td>
+                        <td>{{ person.PlacePub }}</td>
+                        <td>{{ person.TertiaryAuthors }}</td>
+                        <td>{{ person.QuaternaryAuthors }}</td>
+                        <td>{{ person.QuinaryAuthors }}</td>
+                        <td>{{ person.TertiaryTitle }}</td>
+                        <td>{{ person.ISSN }}</td>
+                        <td>{{ person.Availability }}</td>
+                        <td>{{ person1.Address }}</td>
+                        <td>{{ person.AccNumber }}</td>
+                        <td>{{ person.Language }}</td>
+                        <td>{{ person.Classification }}</td>
+                        <td>{{ person.SubFile }}</td>
+                        <td>{{ person.OrgForiegnTitle }}</td>
+                        <td>{{ person.url }}</td>
+                        <td>{{ person.DOI }}</td>
+                        <td>{{ person.CallNumber }}</td>
+                        <td>{{ person.Database }}</td>
+                        <td>{{ person.DataSource }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var table = $('#table12').DataTable();
+            $('a.toggle-vis').on( 'click', function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = table.column( $(this).attr('data-column') );
+                // Toggle the visibility
+                column.visible( ! column.visible() );
+                for ( var i = 0; i < table.rows.count ; i++ )
+                {
+                   table[i].ID.hide();
+                }
+
+
+            } );
+        } );
+    </script>

@@ -1,0 +1,47 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true",
+    "translate": "sidebar.heading.HEADER"
+  },
+  {
+    "text": "Primary Studies",
+    "sref": "#",
+    "icon": "icon-grid",
+    "submenu": [
+      { "text": "View Primary Studies",   "sref": "app.table-datatable", "translate": "View Primary Studies" },
+      { "text": "Modify Primary Studies",   "sref": "app.modifyPrimaryStudies", "translate": "Modify Primary Studies" }
+    ],
+    "translate": "Primary Studies"
+  },
+  {
+    "text": "Secondary Studies",
+    "sref": "#",
+    "icon": "icon-grid",
+    "submenu": [
+      { "text": "View Primary Studies",   "sref": "app.table-datatable", "translate": "View Secondary Studies" },
+      { "text": "Modify Primary Studies",   "sref": "app.modifyPrimaryStudies", "translate": "Modify Secondary Studies" }
+    ],
+    "translate": "Secondary Studies"
+  },
+  {
+    "text": "User Management",
+    "sref": "#",
+    "icon": "icon-grid",
+    "submenu": [
+      { "text": "View Primary Studies",   "sref": "app.table-datatable", "translate": "View Secondary Studies" },
+      { "text": "Modify Primary Studies",   "sref": "app.modifyPrimaryStudies", "translate": "Modify Secondary Studies" }
+    ],
+    "translate": "User Management"
+  },
+  {
+    "text": "Parameters Modification",
+    "sref": "#",
+    "icon": "icon-grid",
+    "submenu": [
+      { "text": "View Primary Studies",   "sref": "app.table-datatable", "translate": "View Secondary Studies" },
+      { "text": "Modify Primary Studies",   "sref": "app.modifyPrimaryStudies", "translate": "Modify Secondary Studies" }
+    ],
+    "translate": "Parameters Modification"
+  }
+]
