@@ -41,7 +41,8 @@
             'app.extras',
             'app.mailbox',
             'app.utils',
-            'app.searchModule'
+            'app.searchModule',
+            'app.ngDialogModule'
         ]);
 })();
 

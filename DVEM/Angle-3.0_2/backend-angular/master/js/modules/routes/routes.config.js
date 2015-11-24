@@ -37,7 +37,15 @@
               templateUrl: helper.basepath('search.html'),
               resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
           })
-
+            .state('app.ngdialogModule', {
+                url: '/ngdialog',
+                title: 'ngDialog',
+                templateUrl: 'app/views/ngdialog.html',
+                resolve: angular.extend(helper.resolveFor('ngDialog'),{
+                    tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
+                }),
+                controller: 'MainController'
+            })
           .state('app.table-datatable', {
               url: '/table-datatable',
               title: 'Table Datatable',
@@ -55,6 +63,9 @@
             .state('page.search', {
                 url: '/search',
                 title: 'search',
+                resolve: angular.extend(helper.resolveFor('ngDialog'),{
+                    tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
+                }),
                 templateUrl: 'app/pages/search.html'
             })
             .state('page.login', {
@@ -62,7 +73,6 @@
                 title: 'login',
                 templateUrl: 'app/pages/login.html'
             })
-
           ;
 
     } // routesConfig

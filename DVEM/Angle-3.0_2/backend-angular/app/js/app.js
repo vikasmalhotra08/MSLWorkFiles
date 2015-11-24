@@ -41,7 +41,8 @@
             'app.extras',
             'app.mailbox',
             'app.utils',
-            'app.searchModule'
+            'app.searchModule',
+            'app.ngDialogModule'
         ]);
 })();
 
@@ -203,6 +204,7 @@
         .module('app.searchModule',[]);
 
 })();
+
 (function() {
     'use strict';
 
@@ -222,6 +224,13 @@
         .module('app.utils', [
           'app.colors'
           ]);
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.ngDialogModule', []);
 })();
 
 (function() {
@@ -1395,9 +1404,6 @@
 })();
 
 
-
-
-
 /**=========================================================
  * Module: classy-loader.js
  * Enable use of classyloader directly from data attributes
@@ -2358,7 +2364,7 @@
       $rootScope.$stateParams = $stateParams;
       $rootScope.$storage = $window.localStorage;
 
-      // Uncomment this to disable template cache
+        // Uncomment this to disable template cache
       /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
           if (typeof(toState) !== 'undefined'){
             $templateCache.remove(toState.templateUrl);
@@ -2812,6 +2818,83 @@
  * - ngDialogProvider for default values not supported 
  *   using lazy loader. Include plugin in base.js instead.
  =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.ngDialogModule')
+        .controller('MainController', MainController);
+    MainController.$inject = ['$scope', '$rootScope', 'ngDialog', '$timeout','ngDialogProvider' , 'tpl'];
+    function MainController($scope, $rootScope, ngDialog, $timeout,ngDialogProvider, tpl){
+
+        $rootScope.app.config(["ngDialogProvider", function (ngDialogProvider) {
+            ngDialogProvider.setDefaults({
+                className: "ngdialog-theme-default",
+                plain: false,
+                showClose: true,
+                closeByDocument: true,
+                closeByEscape: true,
+                appendTo: false,
+                preCloseCallback: function () {
+                    console.log("default pre-close callback");
+                }
+            });
+        }]);
+
+        activate();
+
+        function activate() {
+            // share with other controllers
+            $scope.tpl = tpl;
+            // open dialog window
+            ngDialog.open({
+                template: tpl.path,
+                // plain: true,
+                className: 'ngdialog-theme-default'
+            });
+        }
+
+
+
+
+        $rootScope.jsonData = '{"foo": "bar"}';
+        $rootScope.theme = 'ngdialog-theme-default';
+
+        $scope.openConfirm = function () {
+            ngDialog.openConfirm({
+                template: 'modalDialogId',
+                className: 'ngdialog-theme-default'
+            }).then(function (value) {
+                console.log('Modal promise resolved. Value: ', value);
+            }, function (reason) {
+                console.log('Modal promise rejected. Reason: ', reason);
+            });
+        };
+
+        $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+            console.log('ngDialog opened: ' + $dialog.attr('id'));
+        });
+
+        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+            console.log('ngDialog closed: ' + $dialog.attr('id'));
+        });
+
+        $rootScope.$on('ngDialog.closing', function (e, $dialog) {
+            console.log('ngDialog closing: ' + $dialog.attr('id'));
+        });
+
+        $rootScope.$on('ngDialog.templateLoading', function (e, template) {
+            console.log('ngDialog template is loading: ' + template);
+        });
+
+        $rootScope.$on('ngDialog.templateLoaded', function (e, template) {
+            console.log('ngDialog template loaded: ' + template);
+        });
+
+    }
+
+})();
 
 (function() {
     'use strict';
@@ -6760,7 +6843,7 @@
             dismiss: '<a href="#" panel-dismiss="" tooltip="Close Panel">\
                        <em class="fa fa-times"></em>\
                      </a>',
-            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" tooltip="Refresh Panel">\
+            refresh: '<a ng-click="reloadPage" panel-refresh="" data-spinner="{{spinner}}" tooltip="Refresh Panel">\
                        <em class="fa fa-refresh"></em>\
                      </a>'
           };
@@ -7257,6 +7340,15 @@
                 templateUrl: helper.basepath('modifyPrimaryStudies.html'),
                 resolve: helper.resolveFor('datatables')
             })
+            .state('app.ngdialog', {
+                url: '/ngdialog',
+                title: 'ngDialog',
+                templateUrl: helper.basepath('ngdialog.html'),
+                resolve: angular.extend(helper.resolveFor('ngDialog'),{
+                    tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
+                }),
+                controller: 'DialogIntroCtrl'
+            })
             .state('page', {
                 url: '/page',
                 templateUrl: 'app/pages/page.html',
@@ -7295,15 +7387,38 @@
         .controller('SearchController',SearchController)
         .controller('InsideCtrl', InsideCtrl)
         .controller('SecondModalCtrl', SecondModalCtrl)
+        .controller('ModalCtrl', function ($scope, $modalInstance, cat) {
+            $scope.cat = cat;
+        })
         .controller('DialogMainCtrl', DialogMainCtrl);
 
-    SearchController.$inject = ['$http','$scope','$resource'];
-    function SearchController($http, $scope,$resource){
+    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
+    function SearchController($http, $scope,$resource,$modal,$filter){
         var vm = this;
+
+        var orderBy = $filter('orderBy');
         var qTypeOfStudy = "";
         var qTypeOfSpecies = "";
         var qTypeOfSpeciality = "";
         var count = 1;
+
+        $scope.reloadPage = function(){window.location.reload();}
+
+        // data is present, we need to define ga variable to push the data into that
+
+
+        $scope.openModal = function (data) {
+            var modalInstance = $modal.open({
+                templateUrl: '/partials/submission_mod.html',
+                controller: 'ModalCtrl',
+                resolve: {
+                    cat: function () {
+                        return data;
+                    }
+                }
+            });
+        };
+
 
         $scope.getById = function (id) {
            // I am able to get search text, type of species, type of speciality, type of studies
@@ -7372,9 +7487,6 @@
 
         activate();
 
-
-
-
         $http({
             method: 'POST',
             url: 'server/MiscData/fetchTypeOfStudies.php',
@@ -7407,6 +7519,8 @@
             vm.states = States.query();
         }
     }
+
+
 
     DialogMainCtrl.$inject = ['$scope', '$rootScope', 'ngDialog'];
     // Loads from view
@@ -7469,6 +7583,9 @@
 
     }
 })();
+
+
+
 
 
 /**=========================================================

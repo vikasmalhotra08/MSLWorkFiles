@@ -84,11 +84,27 @@ if (isset($request['data']) && $request["data"] == "getData" ) {
             $searchQuery = $conn->prepare($sql);
         }
         else{
-            // Now that we know what options have been passed from the search query, lets use them to create a sql statement:
-            $sql = "select id, PrimaryAuthors as primary_authors, PrimaryTitle as primary_title, PubYear as pub_year from primarystudiesheader as PH ";
+            // If search text is present
+            if ( $request["searchText"]) {
+                $searchValue = $request["searchText"];
 
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $searchQuery = $conn->prepare($sql);
+                // Now that we know what options have been passed from the search query, lets use them to create a sql statement:
+                $sql = "select id, PrimaryAuthors as primary_authors, PrimaryTitle as primary_title, PubYear as pub_year from primarystudiesheader as PH where ";
+                $sql = $sql . " MATCH(`Keywords`,`FullPeriodical`,`PrimaryTitle`,`PrimaryAuthors`,`Abstract`,`SecondaryTitle`, `SecondaryAuthors` , `TertiaryAuthors` , `QuaternaryAuthors`, `QuinaryAuthors`)
+                    AGAINST ('" . $request["searchText"] . "');";
+
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $searchQuery = $conn->prepare($sql);
+            }
+            // If search text is not present
+            else{
+                    $searchValue = $request["searchText"];
+
+                    // Now that we know what options have been passed from the search query, lets use them to create a sql statement:
+                    $sql = "select id, PrimaryAuthors as primary_authors, PrimaryTitle as primary_title, PubYear as pub_year from primarystudiesheader as PH";
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $searchQuery = $conn->prepare($sql);
+            }
         }
 
         if ($searchQuery->execute()){
