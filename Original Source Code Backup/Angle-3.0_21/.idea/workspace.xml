@@ -25,21 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ngdialog.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ngdialog.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend-angular/app/views/ngdialog.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.961538" vertical-offset="72" max-vertical-offset="2601">
-              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend-angular/app/pages/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="884">
-              <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.19636364" vertical-offset="2051" max-vertical-offset="2601">
+              <caret line="127" column="51" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -58,17 +48,17 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-angular/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="544">
-              <caret line="7" column="94" selection-start-line="7" selection-start-column="94" selection-end-line="7" selection-end-column="94" />
+            <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="544">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-angular/app/views/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5284974" vertical-offset="1326" max-vertical-offset="7582">
+            <state vertical-scroll-proportion="-11.769231" vertical-offset="1326" max-vertical-offset="7582">
               <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
               <folding />
             </state>
@@ -88,10 +78,9 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-angular/app/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="37.344826" vertical-offset="110087" max-vertical-offset="157998">
-              <caret line="6660" column="3" selection-start-line="6660" selection-start-column="3" selection-end-line="6660" selection-end-column="3" />
+            <state vertical-scroll-proportion="-5.448276" vertical-offset="143798" max-vertical-offset="158270">
+              <caret line="8700" column="27" selection-start-line="8700" selection-start-column="27" selection-end-line="8700" selection-end-column="27" />
               <folding>
-                <element signature="e#85137#85490#0" expanded="false" />
                 <element signature="e#85640#92281#0" expanded="false" />
                 <element signature="e#92393#92908#0" expanded="false" />
                 <element signature="e#93011#93195#0" expanded="false" />
@@ -101,6 +90,19 @@
                 <marker date="1447262364451" expanded="true" signature="215372:215455" placeholder="..." />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend-angular/app/documentation/readme.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="4.8727274" vertical-offset="4909" max-vertical-offset="10455">
+              <caret line="273" column="39" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -232,11 +234,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="master" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -254,7 +252,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,16 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/app/documentation/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33204633" vertical-offset="406" max-vertical-offset="10455">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="6" />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend-angular/app/views/table-angulargrid.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="408">
@@ -646,34 +638,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/app/pages/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16" max-vertical-offset="884">
-          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend-angular/app/views/ngdialog-template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3158784" vertical-offset="0" max-vertical-offset="592">
           <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/master/js/modules/routes/routes.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1568" max-vertical-offset="10217">
-          <caret line="107" column="32" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/app/views/ngdialog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.961538" vertical-offset="72" max-vertical-offset="2601">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -701,23 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="37.344826" vertical-offset="110087" max-vertical-offset="157998">
-          <caret line="6660" column="3" selection-start-line="6660" selection-start-column="3" selection-end-line="6660" selection-end-column="3" />
-          <folding>
-            <element signature="e#85137#85490#0" expanded="false" />
-            <element signature="e#85640#92281#0" expanded="false" />
-            <element signature="e#92393#92908#0" expanded="false" />
-            <element signature="e#93011#93195#0" expanded="false" />
-            <marker date="1447262364451" expanded="true" signature="143613:143625" placeholder="..." />
-            <marker date="1447262364451" expanded="true" signature="214925:215110" placeholder="..." />
-            <marker date="1447262364451" expanded="true" signature="215186:215267" placeholder="..." />
-            <marker date="1447262364451" expanded="true" signature="215372:215455" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend-angular/app/views/search.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="935">
@@ -735,18 +686,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/index.html">
+    <entry file="file://$PROJECT_DIR$/backend-angular/app/views/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="544">
-          <caret line="7" column="94" selection-start-line="7" selection-start-column="94" selection-end-line="7" selection-end-column="94" />
+        <state vertical-scroll-proportion="-11.769231" vertical-offset="1326" max-vertical-offset="7582">
+          <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend-angular/app/views/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/backend-angular/app/pages/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5284974" vertical-offset="1326" max-vertical-offset="7582">
-          <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.8631757" vertical-offset="16" max-vertical-offset="884">
+          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-angular/master/js/modules/routes/routes.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1568" max-vertical-offset="10217">
+          <caret line="107" column="32" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-angular/app/documentation/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.8727274" vertical-offset="4909" max-vertical-offset="10455">
+          <caret line="273" column="39" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-angular/app/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.448276" vertical-offset="143798" max-vertical-offset="158270">
+          <caret line="8700" column="27" selection-start-line="8700" selection-start-column="27" selection-end-line="8700" selection-end-column="27" />
+          <folding>
+            <element signature="e#85640#92281#0" expanded="false" />
+            <element signature="e#92393#92908#0" expanded="false" />
+            <element signature="e#93011#93195#0" expanded="false" />
+            <marker date="1447262364451" expanded="true" signature="143613:143625" placeholder="..." />
+            <marker date="1447262364451" expanded="true" signature="214925:215110" placeholder="..." />
+            <marker date="1447262364451" expanded="true" signature="215186:215267" placeholder="..." />
+            <marker date="1447262364451" expanded="true" signature="215372:215455" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-angular/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="544">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-angular/app/views/ngdialog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19636364" vertical-offset="2051" max-vertical-offset="2601">
+          <caret line="127" column="51" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="51" />
           <folding />
         </state>
       </provider>

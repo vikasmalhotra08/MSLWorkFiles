@@ -7,12 +7,12 @@
     angular
         .module('app.searchModule')
         .controller('SearchController',SearchController)
-        .controller('InsideCtrl', InsideCtrl)
-        .controller('SecondModalCtrl', SecondModalCtrl)
-        .controller('DialogMainCtrl', DialogMainCtrl);
+        .controller('ModalCtrl', function ($scope, $modalInstance, cat) {
+            $scope.cat = cat;
+        })
 
-    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter', 'ngTableParams','ngTableDataService'];
-    function SearchController($http, $scope,$resource,$modal,$filter,ngTableParams,ngTableDataService){
+    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter','ngDialog'];
+    function SearchController($http, $scope,$resource,$modal,$filter, ngDialog){
         var vm = this;
 
         var orderBy = $filter('orderBy');
@@ -20,6 +20,8 @@
         var qTypeOfSpecies = "";
         var qTypeOfSpeciality = "";
         var count = 1;
+
+        $scope.reloadPage = function(){window.location.reload();}
 
         // data is present, we need to define ga variable to push the data into that
 
@@ -102,15 +104,17 @@
 
         };
 
-        $scope.predicate = 'age';
-        $scope.reverse = true;
-        $scope.order = function(predicate) {
-            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-            $scope.predicate = predicate;
+        $scope.sort = function(keyname){
+            $scope.sortKey = keyname;   //set the sortKey to the param passed
+            $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+        }
+
+        $scope.open = function () {
+            ngDialog.open({
+                template: 'firstDialog',
+                className: 'ngdialog-theme-default ngdialog-theme-custom'
+            });
         };
-
-
-
 
         activate();
 
@@ -147,64 +151,5 @@
         }
     }
 
+})();
 
-    DialogMainCtrl.$inject = ['$scope', '$rootScope', 'ngDialog'];
-    // Loads from view
-    function DialogMainCtrl($scope, $rootScope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-            $rootScope.jsonData = '{"foo": "bar"}';
-            $rootScope.theme = 'ngdialog-theme-default';
-
-            $scope.open = function () {
-                ngDialog.open({
-                    template: 'firstDialogId',
-                    controller: 'InsideCtrl',
-                    data: {foo: 'some data'} });
-            };
-
-        }
-
-    } // DialogMainCtrl
-
-    InsideCtrl.$inject = ['$scope', 'ngDialog'];
-    function InsideCtrl($scope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-            $scope.dialogModel = {
-                message : 'message from passed scope'
-            };
-            $scope.openSecond = function () {
-                ngDialog.open({
-                    template: '<p class="lead m0"><a href="" ng-click="closeSecond()">Close all by click here!</a></h3>',
-                    plain: true,
-                    closeByEscape: false,
-                    controller: 'SecondModalCtrl'
-                });
-            };
-        }
-    }
-
-    SecondModalCtrl.$inject = ['$scope', 'ngDialog'];
-    function SecondModalCtrl($scope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-            $scope.closeSecond = function () {
-                ngDialog.close();
-            };
-        }
-
-    }
-})

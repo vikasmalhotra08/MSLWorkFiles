@@ -15,6 +15,10 @@
     MSL's DVM Evidence Search Application
 </h3>
 
+<div class="buttons">
+    <a href="#" ng-click="open()" class="demo">Demo</a>
+</div>
+
 <!-- Search functionality -->
 <div class="row">
     <form ng-submit="getById(search)" ng-controller="SearchController as searchControl1" class="container-fluid">
@@ -40,13 +44,13 @@
                     <thead>
                     <tr>
                         <th>View</th>
-                        <th>Primary Title</th>
-                        <th>Primary Authors</th>
-                        <th>Publication Date</th>
+                        <th ng-click="sort('primary_title')">Primary Title <span class="glyphicon sort-icon" ng-show="sortKey=='primary_title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort('primary_authors')">Primary Authors <span class="glyphicon sort-icon" ng-show="sortKey=='primary_authors'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort('pub_year')">Publication Date <span class="glyphicon sort-icon" ng-show="sortKey=='pub_year'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="data in searchControl1.searchDataValues | orderBy:'primary_title'">
+                    <tr ng-repeat="data in searchControl1.searchDataValues | orderBy:sortKey:reverse">
                         <td ng-click="openModal(data)">
                             <div class="media-box-body">
                                 <!--<div class="pull-right btn btn-info btn-sm" id="show">View</div>-->
@@ -143,3 +147,25 @@
         </div>
     </div>
 </div>
+
+
+<!-- NgDialog -->
+
+<script type="text/ng-template" id="firstDialog">
+    <div class="ngdialog-message">
+        <h2>Native Angular.js solution</h2>
+        <div>With ngDialog you don't need jQuery or Bootstrap to create dialogs for <code>ng-app:</code></div>
+        <ul class="mt">
+            <li>Use it in controllers, factories or directives</li>
+            <li>Create your own directives</li>
+            <li>Style all UI and templates</li>
+            <li>Configure themes</li>
+            <li>Add animations and effects</li>
+        </ul>
+        <div class="mt">Module is shipped with both <code>ngDialog</code> service and default directive.</div>
+    </div>
+    <div class="ngdialog-buttons mt">
+        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="next()">►</button>
+    </div>
+</script>
+

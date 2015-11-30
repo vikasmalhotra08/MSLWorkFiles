@@ -282,7 +282,7 @@ It's also a property `$rootScope.isRTL`  to detect when the site is in RTL mode.
 
 This app uses for routing the [AngularUI Router](https://github.com/angular-ui/ui-router) with nested states making more simple to manage the routing system and load resource in cascade.
 
-All routes are defined in the file __config.js__
+All routes are defined in the file __onfig.js__
 
 ### Translation
 

@@ -7,4 +7,6 @@
 
     angular
         .module('app.searchModule', []);
+
+    
 })();
