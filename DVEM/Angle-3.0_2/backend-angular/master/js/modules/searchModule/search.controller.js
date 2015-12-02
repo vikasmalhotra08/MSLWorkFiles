@@ -11,8 +11,8 @@
             $scope.cat = cat;
         })
 
-    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter','ngDialog'];
-    function SearchController($http, $scope,$resource,$modal,$filter, ngDialog){
+    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
+    function SearchController($http, $scope,$resource,$modal,$filter){
         var vm = this;
 
         var orderBy = $filter('orderBy');

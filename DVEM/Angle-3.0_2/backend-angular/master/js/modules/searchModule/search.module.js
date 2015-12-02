@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.searchModule', []);
+        .module('app.searchModule',[]);
 
-    
+
 })();

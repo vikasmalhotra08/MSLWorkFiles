@@ -37,14 +37,14 @@
               templateUrl: helper.basepath('search.html'),
               resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
           })
-            .state('app.ngdialogModule', {
-                url: '/ngdialog',
+            .state('app.ngdialog', {
+                url: '/search',
                 title: 'ngDialog',
-                templateUrl: 'app/views/ngdialog.html',
+                templateUrl: 'app/pages/search.html',
                 resolve: angular.extend(helper.resolveFor('ngDialog'),{
                     tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
                 }),
-                controller: 'MainController'
+                controller: 'SearchController'
             })
           .state('app.table-datatable', {
               url: '/table-datatable',
