@@ -7045,7 +7045,15 @@ var app=angular.module('angle', []);
 /* Function for search functionality
 *
 * */
-
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+        return [];
+    }
+});
 
 (function() {
     'use strict';
@@ -7144,23 +7152,86 @@ var app=angular.module('angle', []);
             }
 
             // Pass the selected variables to Ajax request:
-
+            var aData = [];
             $http({
                 method: 'POST',
                 url: 'server/search/searchQuery.php',
                 data: {data: 'getData', searchText: id.SearchText , typeOfStudy: qTypeOfStudy , typeOfSpecies: qTypeOfSpecies , typeOfSpeciality: qTypeOfSpeciality },
-                headers: {'Content-Type': 'application/json'}
-            }).then(function(data) {
-                $scope.searchDataValues = (data.data);
-                $scope.totalItems = $scope.searchDataValues.length;
-                });
+                headers: {'Content-Type': 'application/json'},
+                dataType:"json"
+            }).success(function(data) {
 
+                //$scope.searchDataValues = Array.from(data.data);
+                /*
+                $scope.searchDataValues = [];
 
+                for(var prop in data)
+                {
+                    if(data.hasOwnProperty(prop))
+                    {
+                        data[prop].forEach(function(msg){
+                            if($scope.searchDataValues.indexOf(msg) == -1)
+                            {
+                                $scope.searchDataValues.push($.map(msg, function(value, index) {
+                                    return [value];
+                                }));
+                            }
+                        });
+                    }
+                }
 
+                $scope.searchDataValues = [];
+                angular.forEach(data.data, function(element) {
+                    $scope.array.push(element);
+                });*/
 
+                //$scope.searchDataValues = JSON.stringify(data.data);
+
+            $scope.searchDataValues = [[]];
+
+            var r = 1; //start from rows 3
+            var c = 0; //start from col 5
+
+            var rows = data.length;
+            var cols = 4;
+            for( var i=r; i<rows; i++ ) {
+                $scope.searchDataValues.push( [] );
+            }
+            var i = 0;
+
+           for (var k in data){
+                if ( i <= rows) {
+                    $scope.searchDataValues[i].push(
+                        data[k].id, data[k].primary_authors, data[k].primary_title, data[k].pub_year);
+                    i++;
+                }
+           }
+           $scope.totalItems = $scope.searchDataValues.length;
+        });
+    };
+
+        $scope.viewby = 5;
+        $scope.totalItems = $scope.searchDataValues.length;
+        $scope.currentPage = 4;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5; //Number of pager buttons to show
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
         };
 
+        $scope.pageChanged = function() {
+            console.log('Page changed to: ' + $scope.currentPage);
+        };
 
+        $scope.setItemsPerPage = function(num) {
+            $scope.itemsPerPage = num;
+            $scope.currentPage = 1; //reset to first paghe
+        }
+
+
+
+        /*
         $scope.currentPage = 1;
         $scope.numPerPage = 5;
 
@@ -7175,8 +7246,46 @@ var app=angular.module('angle', []);
             end = begin + $scope.numPerPage;
             index = $scope.objects.indexOf(value);
             return (begin <= index && index < end);
+        };*/
+
+
+        // pagination controls
+        /*
+        $scope.currentPage = 1;
+        $scope.totalItems = $scope.searchDataValues.length;
+        $scope.entryLimit = 8; // items per page
+        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+        $scope.pageChanged    = pageChanged;
+        $scope.paginatedList = $scope.searchDataValues.slice(0, $scope.entryLimit);
+
+        function pageChanged(){
+
+            var begin = (($scope.currentPage - 1) * $scope.entryLimit),
+                end   = begin + $scope.entryLimit;
+
+            $scope.paginatedList = $scope.searchDataValues.slice(begin, end);
+
+        }*/
+
+
+       /* $scope.currentPage = 1; //current page
+        $scope.maxSize = 5; //pagination max size
+        $scope.entryLimit = 5; //max rows for data table
+
+
+        $scope.noOfPages = Math.ceil($scope.searchDataValues.length/$scope.entryLimit);
+        $scope.setPage = function(pageNo) {
+            $scope.currentPage = pageNo;
         };
 
+        $scope.filter = function() {
+            window.setTimeout(function() { //wait for 'filtered' to be changed
+
+                $scope.noOfPages = Math.ceil($scope.searchDataValues.length/$scope.entryLimit);
+            }, 10);
+        };
+
+        */
         $scope.sort = function(keyname){
             $scope.sortKey = keyname;   //set the sortKey to the param passed
             $scope.reverse = !$scope.reverse; //if true make it false and vice versa

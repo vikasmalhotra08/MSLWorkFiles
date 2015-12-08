@@ -39,14 +39,14 @@
                     <thead>
                     <tr>
                         <th>View</th>
-                        <th ng-click="sort('primary_title')">Primary Title <span class="glyphicon sort-icon" ng-show="sortKey=='primary_title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th ng-click="sort('primary_authors')">Primary Authors <span class="glyphicon sort-icon" ng-show="sortKey=='primary_authors'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th ng-click="sort('pub_year')">Publication Date <span class="glyphicon sort-icon" ng-show="sortKey=='pub_year'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(data[2])">Primary Title <span class="glyphicon sort-icon" ng-show="sortKey==data[2]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(data[1])">Primary Authors <span class="glyphicon sort-icon" ng-show="sortKey==data[1]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(data[3])">Publication Date <span class="glyphicon sort-icon" ng-show="sortKey==data[3]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="data in searchDataValues | orderBy:sortKey:reverse | filter : paginate">
+                    <tr ng-repeat="data in searchDataValues.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sortKey:reverse">
                         <td ng-click="openModal(data)">
                             <div class="media-box-body">
                                 <!--<div class="pull-right btn btn-info btn-sm" id="show">View</div>-->
@@ -83,9 +83,9 @@
                                 </script>
                             </div>
                         </td>
-                        <td>{{ data.primary_title }}</td>
-                        <td>{{ data.primary_authors }}</td>
-                        <td>{{ data.pub_year }}</td>
+                        <td>{{ data[2]}}</td>
+                        <td>{{ data[1] }}</td>
+                        <td>{{ data[3] }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -101,10 +101,8 @@
                     </div>
                     <div class="col-lg-8"></div>
                     <div class="col-lg-2 text-right">
-                        <pagination total-items="totalItems" ng-model="currentPage"
-                                    max-size="5" boundary-links="true"
-                                    items-per-page="numPerPage" class="pagination-sm">
-                        </pagination>
+                        <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+
                     </div>
                 </div>
             </div>
@@ -115,7 +113,7 @@
         <div class="col-lg-3">
             <h3 class="m0 pb-lg">Filters</h3>
             <div class="form-group mb-xl">
-                
+
                 <form method="get" ng-controller="SearchController as form" class="form-horizontal">
                     <label class="control-label mb">By Type of Study</label><br>
 
