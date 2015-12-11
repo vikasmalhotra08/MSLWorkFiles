@@ -7033,6 +7033,11 @@ var app=angular.module('angle', []);
                 title: 'login',
                 templateUrl: 'app/pages/login.html'
             })
+            .state('page.studydetails', {
+                url: '/studydetails',
+                title: 'studydetails',
+                templateUrl: 'app/pages/studydetails.html'
+            })
                   ;
 
     } // routesConfig
@@ -7064,7 +7069,12 @@ app.filter('startFrom', function() {
         .controller('DialogIntroCtrl', DialogIntroCtrl)
         .controller('DialogMainCtrl', DialogMainCtrl)
         .controller('InsideCtrl', InsideCtrl)
-        .controller('SecondModalCtrl', SecondModalCtrl);
+        .controller('SecondModalCtrl', SecondModalCtrl)
+        .controller('ModalInstanceCtrl', function ($scope, $modalInstance, customer)
+        {
+            $scope.customer = customer;
+
+        });;
 
     SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
 
@@ -7090,16 +7100,20 @@ app.filter('startFrom', function() {
         // data is present, we need to define ga variable to push the data into that
 
 
-        $scope.openModal = function (data) {
+        // MODAL WINDOW
+        $scope.open = function (_customer) {
+
             var modalInstance = $modal.open({
-                templateUrl: '/partials/submission_mod.html',
-                controller: 'ModalCtrl',
+                controller: "ModalInstanceCtrl",
+                templateUrl: 'myModalContent.html',
                 resolve: {
-                    cat: function () {
-                        return data;
+                    customer: function()
+                    {
+                        return _customer;
                     }
                 }
             });
+
         };
 
         $scope.getById = function (id) {
@@ -7186,8 +7200,9 @@ app.filter('startFrom', function() {
                 });*/
 
                 //$scope.searchDataValues = JSON.stringify(data.data);
-
-            $scope.searchDataValues = [[]];
+                $scope.searchDataValues = data;
+                /*
+            $scope.searchDataValues = [];
 
             var r = 1; //start from rows 3
             var c = 0; //start from col 5
@@ -7199,13 +7214,23 @@ app.filter('startFrom', function() {
             }
             var i = 0;
 
+
            for (var k in data){
                 if ( i <= rows) {
-                    $scope.searchDataValues[i].push(
+                    $scope.searchDataValues.push(
+                        {
+                            'id': data[k].id,
+                            'primary_authors': data[k].primary_authors,
+                            'primary_title': data[k].primary_title,
+                            'pub_year': data[k].pub_year
+                        }
+                    );
+
+                    /*$scope.searchDataValues[i].push(
                         data[k].id, data[k].primary_authors, data[k].primary_title, data[k].pub_year);
                     i++;
                 }
-           }
+           }*/
            $scope.totalItems = $scope.searchDataValues.length;
         });
     };

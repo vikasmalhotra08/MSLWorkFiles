@@ -10,7 +10,12 @@
         .controller('DialogIntroCtrl', DialogIntroCtrl)
         .controller('DialogMainCtrl', DialogMainCtrl)
         .controller('InsideCtrl', InsideCtrl)
-        .controller('SecondModalCtrl', SecondModalCtrl);
+        .controller('SecondModalCtrl', SecondModalCtrl)
+        .controller('ModalInstanceCtrl', function ($scope, $modalInstance, customer)
+        {
+            $scope.customer = customer;
+
+        });;
 
     SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
 
@@ -46,6 +51,22 @@
                     }
                 }
             });
+        };
+
+        // MODAL WINDOW
+        $scope.open = function (_customer) {
+
+            var modalInstance = $modal.open({
+                controller: "ModalInstanceCtrl",
+                templateUrl: 'myModalContent.html',
+                resolve: {
+                    customer: function()
+                    {
+                        return _customer;
+                    }
+                }
+            });
+
         };
 
         $scope.getById = function (id) {

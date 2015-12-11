@@ -17,25 +17,6 @@
       <!-- START Left navbar-->
       <ul class="nav navbar-nav">
          <li>
-            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops
-            <a href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
-               <em class="fa fa-navicon"></em>
-            </a>
-
-            <a href="" ng-click="app.asideToggled = !app.asideToggled" class="visible-xs sidebar-toggle">
-               <em class="fa fa-navicon"></em>
-            </a>-->
-         </li>
-         <!-- START User avatar toggle
-         <li>
-
-            <a href="" ng-click="toggleUserBlock()">
-               <em class="icon-user"></em>
-            </a>
-         </li>-->
-         <!-- END User avatar toggle-->
-         <!-- START lock screen-->
-         <li>
             <a ui-sref="page.login" title="login screen" href="#/page/login">
                <em class="icon-user"></em>
             </a>
@@ -45,18 +26,7 @@
       <!-- END Left navbar-->
       <!-- START Right Navbar-->
       <ul class="nav navbar-nav navbar-right">
-         <!-- Search icon-->
-         <li>
-            <a href="" search-open="search-open">
-               <em class="icon-magnifier"></em>
-            </a>
-         </li>
-         <!-- Fullscreen (only desktops)-->
-         <li class="visible-lg">
-            <a href="" toggle-fullscreen="toggle-fullscreen">
-               <em class="fa fa-expand"></em>
-            </a>
-         </li>
+
          <!-- START Alert menu-->
          <li dropdown="" class="dropdown dropdown-list">
             <a dropdown-toggle="">
@@ -122,25 +92,11 @@
             <!-- END Dropdown menu-->
          </li>
          <!-- END Alert menu-->
-         <!-- START Offsidebar button-->
-         <li>
-            <a href="" ng-click="app.offsidebarOpen = !app.offsidebarOpen">
-               <em class="icon-notebook"></em>
-            </a>
-         </li>
-         <!-- END Offsidebar menu-->
+
       </ul>
       <!-- END Right Navbar-->
    </div>
    <!-- END Nav wrapper-->
-   <!-- START Search form-->
-   <form role="search" action="search.html" class="navbar-form">
-      <div class="form-group has-feedback">
-         <input type="text" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" class="form-control" />
-         <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
-      </div>
-      <button type="submit" class="hidden btn btn-default">Submit</button>
-   </form>
-   <!-- END Search form-->
+
 </nav>
 <!-- END Top Navbar-->

@@ -1,17 +1,5 @@
+
 <h3 xmlns="http://www.w3.org/1999/html">
-    <!-- START Language list-->
-    <div class="pull-right">
-        <div dropdown="" is-open="language.listIsOpen" class="btn-group">
-            <button type="button" dropdown-toggle="" class="btn btn-default">{{language.selected}}
-                <span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
-                <li ng-repeat="(localeId, langName) in language.available"><a ng-click="language.set(localeId, $event)">{{langName}}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- END Language list    -->
     MSL's DVM Evidence Search Application
 </h3>
 <!-- Search functionality -->
@@ -25,7 +13,38 @@
                 <button type="button" ng-click="reloadPage()" class="pull-left btn btn-default">Refresh</button>
             </div>
         </div>
-        Search results count: {{searchDataValues.length}}
+
+        <div class="container-fluid">
+            <div>
+                <h3 class="m0 pb-lg">Filters</h3>
+                <div class="form-group mb-xl">
+
+                    <form method="get" class="form-horizontal">
+                        <div class="col-sm-4">
+                        <label class="control-label mb">By Type of Study</label><br>
+                        <select multiple chosen="" ng-model="search.typeOfStudy" ng-options="s for s in searchControl1.typeOfStudies" width="'100%'" class="chosen-select form-control">
+                            <option value=""></option>
+                        </select>
+                        </div>
+                        <div class="col-sm-4">
+                        <label class="control-label mb">By Species</label>
+                        <select multiple  chosen="" ng-model="search.typeOfSpecies" ng-options="s for s in searchControl1.typeOfSpecies" width="'100%'" class="chosen-select form-control">
+                            <option value=""></option>
+                        </select>
+                        </div>
+                        <div class="col-sm-4">
+                        <label class="control-label mb">By Speciality</label>
+                        <select multiple chosen="" ng-model="search.typeofspeciality" ng-options="s for s in searchControl1.typeofspeciality" width="'100%'" class="chosen-select form-control">
+                            <option value=""></option>
+                        </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        Search results count: {{searchDataValues.length}} | Filtered By Study Type: {{search.typeOfStudy}} , By Species Type: {{search.typeOfSpecies}}, By Speciality Type: {{search.typeofspeciality}}
+
         <br><br>
         <!-- START panel-->
         <div class="panel panel-default">
@@ -39,68 +58,49 @@
                     <thead>
                     <tr>
                         <th>View</th>
-                        <th ng-click="sort(data[2])">Primary Title <span class="glyphicon sort-icon" ng-show="sortKey==data[2]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th ng-click="sort(data[1])">Primary Authors <span class="glyphicon sort-icon" ng-show="sortKey==data[1]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th ng-click="sort(data[3])">Publication Date <span class="glyphicon sort-icon" ng-show="sortKey==data[3]" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(primary_title)">Title <span class="glyphicon sort-icon" ng-show="sortKey==primary_title" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(primary_authors)">Primary Authors <span class="glyphicon sort-icon" ng-show="sortKey==primary_authors" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(pub_year)">Publication Date <span class="glyphicon sort-icon" ng-show="sortKey==pub_year" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th ng-click="sort(study_type)">Study Type <span class="glyphicon sort-icon" ng-show="sortKey==study_type" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
                     </tr>
                     </thead>
 
                     <tbody>
                     <tr ng-repeat="data in searchDataValues.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sortKey:reverse">
-                        <td ng-click="openModal(data)">
-                            <div class="media-box-body">
-                                <!--<div class="pull-right btn btn-info btn-sm" id="show">View</div>-->
-                                <button id="{{'object-' + $index }}">Show Dialog</button>
-                                <dialog id="modal">
-                                    <p>Hi, I'm a modal!</p>
-                                    <button id="{{'object1-' + $index }}">Okay</button>
-                                </dialog>
-                                <script>
-                                    var modal = document.getElementById('modal');
-                                    var showBtn = document.getElementById("{{'object-' + $index }}");
-                                    var closeBtn = document.getElementById("{{'object1-' + $index }}");
+                        <td ng-click="open(data)">
+                            <!--MODAL WINDOW-->
 
-                                    // Setup an event listener for the show button.
-                                    if (showBtn){
-                                        showBtn.addEventListener('click', function(e) {
-                                            e.preventDefault();
+                            <script type="text/ng-template" id="myModalContent.html">
+                                <div class="modal-header">
+                                    <h3>Title: <br />{{ customer.primary_title }}</h3>
+                                </div>
+                                <div class="modal-body">
+                                   Primary Authors: {{ customer.primary_authors }}<br />
+                                   Species Type: {{ customer.species_type }}<br />
+                                   Study Type: {{ customer.study_type }}<br />
+                                   Publication Year: {{ customer.pub_year }}<br />
+                                   Journal Name: {{ customer.journal_name }}<br />
 
-                                            // Show the modal.
-                                            modal.showModal();
-                                        });
-                                    }
+                                </div>
+                                <div class="modal-footer">
 
-                                    // Setup an event listener for the close button.
-                                    if (closeBtn){
-                                        closeBtn.addEventListener('click', function(e) {
-                                            e.preventDefault();
-
-                                            // Close the modal.
-                                            modal.close();
-                                        });
-                                    }
-
-                                </script>
-                            </div>
+                                </div>
+                            </script>
                         </td>
-                        <td>{{ data[2]}}</td>
-                        <td>{{ data[1] }}</td>
-                        <td>{{ data[3] }}</td>
+                        <td><a title="login screen" href="#/page/studydetails"  target="_blank">{{ data.primary_title }}</a></td>
+                        <td>{{ data.primary_authors }}</td>
+                        <td>{{ data.pub_year }}</td>
+                        <td>{{ data.study_type }}</td>
                     </tr>
                     </tbody>
                 </table>
-
-
             </div>
 
             <!-- END table-responsive-->
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-lg-2">
-                        <button class="btn btn-sm btn-default">Clear</button>
-                    </div>
                     <div class="col-lg-8"></div>
-                    <div class="col-lg-2 text-right">
+                    <div class="col-lg-4 text-right">
                         <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
 
                     </div>
@@ -109,203 +109,4 @@
         </div>
     </div>
     </form>
-    <div class="container-fluid">
-        <div class="col-lg-3">
-            <h3 class="m0 pb-lg">Filters</h3>
-            <div class="form-group mb-xl">
-
-                <form method="get" ng-controller="SearchController as form" class="form-horizontal">
-                    <label class="control-label mb">By Type of Study</label><br>
-
-
-                    <select multiple chosen="" ng-model="search.typeOfStudy" ng-options="s for s in form.typeOfStudies" width="'100%'" class="chosen-select form-control">
-                        <option value=""></option>
-                    </select>
-
-                    <label class="control-label mb">By Species</label>
-                    <select multiple  chosen="" ng-model="search.typeOfSpecies" ng-options="s for s in form.typeOfSpecies" width="'100%'" class="chosen-select form-control">
-                            <option value=""></option>
-                    </select>
-
-                    <label class="control-label mb">By Speciality</label>
-                    <select multiple chosen="" ng-model="search.typeofspeciality" ng-options="s for s in form.typeofspeciality" width="'100%'" class="chosen-select form-control">
-                            <option value=""></option>
-                    </select>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
-
-<h3>ngDialog
-    <small>Native Angular.js solution</small>
-</h3>
-<div ng-controller="DialogMainCtrl" class="container-fluid">
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open via service</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="open()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open via directive</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-data="{{jsonData}}" ng-dialog-class="ngdialog-theme-default" ng-dialog-show-close="false" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Default theme</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openDefault()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Inline controller</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openInlineController()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open with external template for modal</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openTemplate()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open with external template for modal (disabled cache)</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openTemplateNoCache()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open and use return value to close later</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openTimed()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open and use promise to know when closed</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openNotify()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open confirm modal</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openConfirm()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open default modal with pre-close callback inlined</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openDefaultWithPreCloseCallbackInlined()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open via directive with pre-close callback</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-data="{{jsonData}}" ng-dialog-class="ngdialog-theme-default" ng-dialog-scope="this" ng-dialog-pre-close-callback="directivePreCloseCallback" ng-dialog-show-close="false"
-                  class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open confirm modal with pre-close callback on scope</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openConfirmWithPreCloseCallbackOnScope()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open confirm modal with pre-close inlined with nested confirm.</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openConfirmWithPreCloseCallbackInlinedWithNestedConfirm()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-9 col-lg-6">
-            <p class="mt-sm">Open without overlay</p>
-        </div>
-        <div class="col-xs-3 col-lg-6">
-            <p><a href="" ng-click="openWithoutOverlay()" class="btn btn-default">Open</a>
-            </p>
-        </div>
-    </div>
-    <!-- Templates -->
-    <script type="text/ng-template" id="firstDialogId">
-        <div><h3 class="mt0">ngDialog template</h3><p ng-show="theme">Test content for<code>{{theme}}</code></p><p ng-show="ngDialogData.foo">Data passed through:<code>{{ngDialogData.foo}}</code></p><p ng-show="dialogModel.message">Scope passed through:<code>{{dialogModel.message}}</code></p><button type="button" ng-dialog="secondDialogId" ng-dialog-class="ngdialog-theme-default" ng-dialog-controller="SecondModalCtrl" ng-dialog-close-previous="ng-dialog-close-previous" class="btn btn-default mr">Close and open</button><button type="button" ng-click="openSecond()" class="btn btn-primary">Open next</button></div>
-    </script>
-    <script type="text/ng-template" id="dialogWithNestedConfirmDialogId">
-        <div class="ngdialog-message"><h3 class="mt0">ngDialog template</h3><p>Dialog containing work in which a user has to perform a task (e.g. editing data).</p><p>'Save' would save the task's actions, while 'Cancel' would cause the task's actions to be lost.</p><p>...other controls here...</p><button type="button" ng-click="closeThisDialog('Cancel')" class="btn btn-default mr">Cancel</button><button type="button" ng-click="confirm('Save')" class="btn btn-primary">Save</button></div>
-    </script>
-    <script type="text/ng-template" id="withInlineController">
-        <div class="ngdialog-message"><h3 class="mt0">ngDialog template</h3><p ng-show="theme">Test content for<code>{{theme}}</code></p><p ng-show="exampleExternalData">Example data from external service:<code>{{exampleExternalData}}</code></p><button type="button" ng-click="closeThisDialog()" class="btn btn-primary">Close</button></div>
-    </script>
-    <script type="text/ng-template" id="secondDialogId">
-        <p class="lead m0"><a href="" ng-click="closeSecond()">Close all by click here!</a></p>
-    </script>
-    <script type="text/ng-template" id="modalDialogId">
-        <div class="ngdialog-message"><h3>ngDialog modal example</h3><p>The<code>.openConfirm()</code>function returns a promise that is resolved when confirmed and rejected when otherwise closed. Modal dialogs by default do not close when clicked outside the dialog or when hitting escape. This can ofcourse be overridden when opening the dialog.</p><p>Confirm can take a value. Enter one here for example and see the console output:<input ng-model="confirmValue"/></p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirm</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button></div>
-    </script>
-</div>
-
-
-
-<!-- NgDialog -->
-<!--
-<script type="text/ng-template" id="firstDialog">
-    <div class="ngdialog-message">
-        <h2>Native Angular.js solution</h2>
-        <div>With ngDialog you don't need jQuery or Bootstrap to create dialogs for <code>ng-app:</code></div>
-        <ul class="mt">
-            <li>Use it in controllers, factories or directives</li>
-            <li>Create your own directives</li>
-            <li>Style all UI and templates</li>
-            <li>Configure themes</li>
-            <li>Add animations and effects</li>
-        </ul>
-        <div class="mt">Module is shipped with both <code>ngDialog</code> service and default directive.</div>
-    </div>
-    <div class="ngdialog-buttons mt">
-        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="next()">►</button>
-    </div>
-</script>
-
--->

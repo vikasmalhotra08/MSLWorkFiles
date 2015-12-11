@@ -73,6 +73,11 @@
                 title: 'login',
                 templateUrl: 'app/pages/login.html'
             })
+            .state('page.studydetails', {
+                url: '/studydetails',
+                title: 'Study Details',
+                templateUrl: 'app/pages/studydetails.html'
+            })
           ;
 
     } // routesConfig
