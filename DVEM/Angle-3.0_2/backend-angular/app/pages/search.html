@@ -72,7 +72,7 @@
 
                             <script type="text/ng-template" id="myModalContent.html">
                                 <div class="modal-header">
-                                    <h3>Title: <br />{{ customer.primary_title }}</h3>
+                                    <h3>{{ customer.primary_title }}</h3>
                                 </div>
                                 <div class="modal-body">
                                    Primary Authors: {{ customer.primary_authors }}<br />
@@ -87,7 +87,7 @@
                                 </div>
                             </script>
                         </td>
-                        <td><a title="login screen" href="#/page/studydetails"  target="_blank">{{ data.primary_title }}</a></td>
+                        <td><a title="login screen" href="#/page/studydetails?documentID=5"  target="_blank">{{ data.primary_title }}</a></td>
                         <td>{{ data.primary_authors }}</td>
                         <td>{{ data.pub_year }}</td>
                         <td>{{ data.study_type }}</td>

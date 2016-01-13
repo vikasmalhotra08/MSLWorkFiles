@@ -12,8 +12,8 @@
       // Global Settings
       // ----------------------------------- 
       $rootScope.app = {
-        name: 'Angle',
-        description: 'Angular Bootstrap Admin Template',
+        name: 'DVM Evidence',
+        description: 'Medical Science Library Application',
         year: ((new Date()).getFullYear()),
         layout: {
           isFixed: true,

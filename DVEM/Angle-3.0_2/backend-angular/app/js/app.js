@@ -7034,9 +7034,10 @@ var app=angular.module('angle', []);
                 templateUrl: 'app/pages/login.html'
             })
             .state('page.studydetails', {
-                url: '/studydetails',
+                url: '/studydetails?documentID',
                 title: 'studydetails',
-                templateUrl: 'app/pages/studydetails.html'
+                templateUrl: 'app/pages/studydetails.html',
+                controller: 'SecondCtrl'
             })
                   ;
 
@@ -7066,19 +7067,46 @@ app.filter('startFrom', function() {
     angular
         .module('app.searchModule')
         .controller('SearchController',SearchController)
-        .controller('DialogIntroCtrl', DialogIntroCtrl)
+        .controller('SecondCtrl', SecondCtrl)
         .controller('DialogMainCtrl', DialogMainCtrl)
         .controller('InsideCtrl', InsideCtrl)
         .controller('SecondModalCtrl', SecondModalCtrl)
+        .service('srvShareData', function($window) {
+            var KEY = 'App.SelectedValue';
+
+            var addData = function(newObj) {
+                var mydata = $window.sessionStorage.getItem(KEY);
+                if (mydata) {
+                    mydata = JSON.parse(mydata);
+                } else {
+                    mydata = [];
+                }
+                mydata.push(newObj);
+                $window.sessionStorage.setItem(KEY, JSON.stringify(mydata));
+            };
+
+            var getData = function(){
+                var mydata = $window.sessionStorage.getItem(KEY);
+                if (mydata) {
+                    mydata = JSON.parse(mydata);
+                }
+                return mydata || [];
+            };
+
+            return {
+                addData: addData,
+                getData: getData
+            };
+        })
         .controller('ModalInstanceCtrl', function ($scope, $modalInstance, customer)
         {
             $scope.customer = customer;
 
         });;
 
-    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
+    SearchController.$inject = ['$http','$scope','$resource', '$modal', '$filter','srvShareData'];
 
-    function SearchController($http, $scope,$resource,$modal,$filter){
+    function SearchController($http, $scope,$resource,$modal,$filter,srvShareData){
 
         var vm = this;
 
@@ -7119,13 +7147,6 @@ app.filter('startFrom', function() {
         $scope.getById = function (id) {
            // I am able to get search text, type of species, type of speciality, type of studies
             // Now pass this in a combined search query to the php file and get back the results.
-
-            /* These variables provide me the query parameters
-            alert(id.SearchText);
-            alert(id.typeOfStudy);
-            alert(id.typeOfSpecies);
-            alert(id.typeofspeciality);*/
-            // For Study type
 
             if (id.typeOfStudy){
                 $.each(id.typeOfStudy, function() {
@@ -7174,64 +7195,8 @@ app.filter('startFrom', function() {
                 headers: {'Content-Type': 'application/json'},
                 dataType:"json"
             }).success(function(data) {
-
-                //$scope.searchDataValues = Array.from(data.data);
-                /*
-                $scope.searchDataValues = [];
-
-                for(var prop in data)
-                {
-                    if(data.hasOwnProperty(prop))
-                    {
-                        data[prop].forEach(function(msg){
-                            if($scope.searchDataValues.indexOf(msg) == -1)
-                            {
-                                $scope.searchDataValues.push($.map(msg, function(value, index) {
-                                    return [value];
-                                }));
-                            }
-                        });
-                    }
-                }
-
-                $scope.searchDataValues = [];
-                angular.forEach(data.data, function(element) {
-                    $scope.array.push(element);
-                });*/
-
-                //$scope.searchDataValues = JSON.stringify(data.data);
                 $scope.searchDataValues = data;
-                /*
-            $scope.searchDataValues = [];
-
-            var r = 1; //start from rows 3
-            var c = 0; //start from col 5
-
-            var rows = data.length;
-            var cols = 4;
-            for( var i=r; i<rows; i++ ) {
-                $scope.searchDataValues.push( [] );
-            }
-            var i = 0;
-
-
-           for (var k in data){
-                if ( i <= rows) {
-                    $scope.searchDataValues.push(
-                        {
-                            'id': data[k].id,
-                            'primary_authors': data[k].primary_authors,
-                            'primary_title': data[k].primary_title,
-                            'pub_year': data[k].pub_year
-                        }
-                    );
-
-                    /*$scope.searchDataValues[i].push(
-                        data[k].id, data[k].primary_authors, data[k].primary_title, data[k].pub_year);
-                    i++;
-                }
-           }*/
-           $scope.totalItems = $scope.searchDataValues.length;
+                $scope.totalItems = $scope.searchDataValues.length;
         });
     };
 
@@ -7254,63 +7219,16 @@ app.filter('startFrom', function() {
             $scope.currentPage = 1; //reset to first paghe
         }
 
+        $scope.dataToShare = [];
 
+        $scope.shareMyData = function (myValue) {
 
-        /*
-        $scope.currentPage = 1;
-        $scope.numPerPage = 5;
+            $scope.dataToShare = myValue;
+            srvShareData.addData($scope.dataToShare);
 
-        $scope.numberOfPages=function(){
-            return Math.ceil($scope.searchDataValues.length/$scope.numPerPage);
+            window.location.href = "studydetails.html";
         }
 
-
-        $scope.paginate = function(value) {
-            var begin, end, index;
-            begin = ($scope.currentPage - 1) * $scope.numPerPage;
-            end = begin + $scope.numPerPage;
-            index = $scope.objects.indexOf(value);
-            return (begin <= index && index < end);
-        };*/
-
-
-        // pagination controls
-        /*
-        $scope.currentPage = 1;
-        $scope.totalItems = $scope.searchDataValues.length;
-        $scope.entryLimit = 8; // items per page
-        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
-        $scope.pageChanged    = pageChanged;
-        $scope.paginatedList = $scope.searchDataValues.slice(0, $scope.entryLimit);
-
-        function pageChanged(){
-
-            var begin = (($scope.currentPage - 1) * $scope.entryLimit),
-                end   = begin + $scope.entryLimit;
-
-            $scope.paginatedList = $scope.searchDataValues.slice(begin, end);
-
-        }*/
-
-
-       /* $scope.currentPage = 1; //current page
-        $scope.maxSize = 5; //pagination max size
-        $scope.entryLimit = 5; //max rows for data table
-
-
-        $scope.noOfPages = Math.ceil($scope.searchDataValues.length/$scope.entryLimit);
-        $scope.setPage = function(pageNo) {
-            $scope.currentPage = pageNo;
-        };
-
-        $scope.filter = function() {
-            window.setTimeout(function() { //wait for 'filtered' to be changed
-
-                $scope.noOfPages = Math.ceil($scope.searchDataValues.length/$scope.entryLimit);
-            }, 10);
-        };
-
-        */
         $scope.sort = function(keyname){
             $scope.sortKey = keyname;   //set the sortKey to the param passed
             $scope.reverse = !$scope.reverse; //if true make it false and vice versa
@@ -7349,27 +7267,28 @@ app.filter('startFrom', function() {
         }
     }
 
-
-
-
-    DialogIntroCtrl.$inject = ['$scope', 'ngDialog', 'tpl'];
+    SecondCtrl.$inject = ['$http','$scope','$resource', '$modal', '$filter'];
     // Called from the route state. 'tpl' is resolved before
-    function DialogIntroCtrl($scope, ngDialog, tpl) {
+    function SecondCtrl($http, $scope,$resource,$modal,$filter) {
 
-        activate();
-
-        ////////////////
-
-        function activate() {
-            // share with other controllers
-            $scope.tpl = tpl;
-            // open dialog window
-            ngDialog.open({
-                template: tpl.path,
-                // plain: true,
-                className: 'ngdialog-theme-default'
-            });
+        function getParameterByName(name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.hash);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
         }
+
+        $scope.documentID = getParameterByName("documentID");
+
+        $http({
+            method: 'POST',
+            url: 'server/search/searchQuery.php',
+            data: {data: 'getData', documentID: $scope.documentID},
+            headers: {'Content-Type': 'application/json'},
+            dataType:"json"
+        }).success(function(data) {
+            $scope.studyDetailsData = data;
+        });
+
+
     }
 
     DialogMainCtrl.$inject = ['$scope', '$rootScope', 'ngDialog'];

@@ -76,7 +76,8 @@
             .state('page.studydetails', {
                 url: '/studydetails',
                 title: 'Study Details',
-                templateUrl: 'app/pages/studydetails.html'
+                templateUrl: 'app/pages/studydetails.html',
+                controller: 'SecondCtrl'
             })
           ;
 

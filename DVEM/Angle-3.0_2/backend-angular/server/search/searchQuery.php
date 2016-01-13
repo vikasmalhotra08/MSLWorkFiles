@@ -23,6 +23,17 @@ if (isset($request['data']) && $request["data"] == "getData" ) {
         $queryFlag = false;
         // Various steps of search queries:
 
+        // If request contains a flag which matches with study details page, show the details
+        if($request["documentID"]){
+            $documentID = $request["documentID"];
+            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            $detailsQuery = $conn->prepare("select PrimaryAuthors as primary_authors, PrimaryTitle as primary_title, PubYear as pub_year from primarystudiesheader as PH where PH.id IN ($documentID) ");
+            $detailsQuery->execute();
+            $detailsResult = recursive_implode($detailsQuery->fetchAll(PDO::FETCH_ASSOC));
+            echo $detailsResult;
+            return;
+        }
+
         if ( $request["typeOfStudy"] )
         {
             $varTypeOfStudy = $request["typeOfStudy"];
